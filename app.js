@@ -2,6 +2,7 @@ var http = require('http');
 var fs = require('fs');
 
 fs.readFile('./index.html', function (err, html) {
+  
   if (err) {
     throw err;
   }
@@ -23,18 +24,10 @@ fs.readFile('./index.html', function (err, html) {
       response.write(html);
       response.end();
     } else {
-      // Serve a 404 Not Found page for all other requests
-      fs.readFile('./404.html', function (err, notFoundPage) {
-        if (err) {
-          // If the 404.html file is missing, you can provide a simple text response
-          response.writeHead(404, { "Content-Type": "text/plain" });
-          response.end('404 Not Found');
-        } else {
-          response.writeHead(404, { "Content-Type": "text/html" });
-          response.write(notFoundPage);
-          response.end();
-        }
-      });
+      // Serve a custom 404 Not Found page for all other requests
+      response.writeHead(404, { 'Content-Type': 'text/html' });
+      response.end(`<meta http-equiv="Refresh" content="0; url='/'" />`);
     }
   }).listen(9001);
+
 });
