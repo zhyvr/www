@@ -26,7 +26,7 @@ fs.readFile('./index.html', function (err, html) {
     } else {
       // Serve a custom 404 Not Found page for all other requests
       response.writeHead(404, { 'Content-Type': 'text/html' });
-      response.end(`404`);
+      response.end("404");
     }
   }).listen(9001);
 
